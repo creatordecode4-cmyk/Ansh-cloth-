@@ -13,6 +13,7 @@ import {
   useTexture,
 } from "@react-three/drei";
 import type { Group, Points as ThreePoints } from "three";
+import { asset } from "@/lib/asset";
 import type { ResolvedProduct } from "@/lib/products";
 import ProductStage, { useStageLayout } from "./ProductStage";
 import ProductModel from "./ProductModel";
@@ -117,7 +118,7 @@ export default function Scene({ products }: { products: ResolvedProduct[] }) {
       <Suspense fallback={null}>
         <SoftBoundary>
           {/* drei's "studio" preset, self-hosted (CC0, @pmndrs/assets) instead of fetched from a CDN at runtime */}
-          <Environment files="/hdri/studio.exr" environmentIntensity={0.7} />
+          <Environment files={asset("/hdri/studio.exr")} environmentIntensity={0.7} />
         </SoftBoundary>
       </Suspense>
 

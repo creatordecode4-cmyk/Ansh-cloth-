@@ -10,6 +10,18 @@ npm run dev     # http://localhost:3000
 npm run build
 ```
 
+## Deploy
+
+**Vercel:** import the repo with default settings (framework is detected as Next.js; build `npm run build`).
+
+**GitHub Pages:** `.github/workflows/deploy.yml` builds a static export on every push to `main` and deploys it.
+One-time setup: repo **Settings → Pages → Source: GitHub Actions**. The site is served at
+https://creatordecode4-cmyk.github.io/Ansh-cloth-/
+
+The export and `/Ansh-cloth-` base path are switched on only when `GITHUB_PAGES=true`, so `npm run dev` and Vercel are unaffected.
+To try the Pages build locally: `GITHUB_PAGES=true npm run build` (output in `out/`).
+Any new file URL under `public/` used in code should go through `asset()` from `lib/asset.ts` so it gets the base path.
+
 ## Products
 
 All product data lives in `lib/products.ts` (name, tagline, price, `modelPath`, `imagePath`, glow colours).
@@ -59,6 +71,6 @@ The order of the array is the scroll order. Each entry looks like this:
 ## Assets
 
 - `public/models/*.glb` — optimised, plain GLB (no Draco), loaded with `useGLTF`.
-- `public/images/*.jpg` — fallback product photos (jacket and shirt cropped to remove a watermark; uncropped copies in `originals/images/`).
+- `public/images/*.jpg` — fallback product photos (jacket, shirt and belt cropped to remove a watermark; uncropped copies in `originals/images/`).
 - `public/hdri/studio.exr` — drei's "studio" environment (CC0, from `@pmndrs/assets`), self-hosted.
 - `originals/` — uncompressed source files; git-ignored, never commit.
