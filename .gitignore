@@ -16,3 +16,6 @@ next-env.d.ts
 *.log
 .env*.local
 .vercel
+
+# untouched copies of the shipped GLBs (before texture clean-up) — never commit
+/originals-models/

@@ -12,7 +12,7 @@ export type Product = {
    * Optional fix-ups for a model's material factors (multiplied with its texture maps),
    * e.g. when an auto-generated GLB marks glass as mirror metal and renders black.
    */
-  material?: { metalness?: number; roughness?: number };
+  material?: { metalness?: number; roughness?: number; envMapIntensity?: number };
   /** Primary pastel blob behind the product (also the image-card frame). */
   glow: string;
   /** Secondary pastel blob, bottom-left. */
@@ -30,6 +30,8 @@ export const products: Product[] = [
     price: 12400,
     modelPath: "/models/watch.glb",
     imagePath: "/images/watch.jpg",
+    // Less studio reflection so the glossy black dial shows its real colour instead of a pale grey-blue sheen.
+    material: { envMapIntensity: 0.45 },
     glow: "#FFD2B8",
     glow2: "#D6E6FA",
     bg: "#FBF3EC",

@@ -13,8 +13,9 @@ export function registerModel(path: string, scene: Object3D) {
 }
 
 function disposeMaterial(material: Material) {
-  for (const value of Object.values(material)) {
-    if (value instanceof Texture) value.dispose();
+  for (const [key, value] of Object.entries(material)) {
+    // envMap may be the shared scene environment (see ProductModel), which must outlive any one model.
+    if (value instanceof Texture && key !== "envMap") value.dispose();
   }
   material.dispose();
 }
