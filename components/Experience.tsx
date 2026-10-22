@@ -56,6 +56,7 @@ export default function Experience({ products }: { products: ResolvedProduct[] }
     const names = Array.from(document.querySelectorAll<HTMLElement>("[data-outline-name]"));
     const dots = Array.from(document.querySelectorAll<HTMLElement>("[data-progress-dot]"));
     const fill = document.querySelector<HTMLElement>("[data-progress-fill]");
+    const fillX = document.querySelector<HTMLElement>("[data-progress-fill-x]");
     const root = document.documentElement;
 
     const ctx = gsap.context(() => {
@@ -121,7 +122,8 @@ export default function Experience({ products }: { products: ResolvedProduct[] }
     // Per-frame visuals that follow scrollState.t: background tint, outline names, progress rail.
     let lastBg = "";
     let lastActive = -1;
-    const progressEl = document.querySelector<HTMLElement>("[data-progress]");
+    const progressEls = Array.from(document.querySelectorAll<HTMLElement>("[data-progress]"));
+    let progressShown = false;
     const visuals = () => {
       const t = scrollState.t;
       const u = t - EXIT_START;
@@ -146,8 +148,13 @@ export default function Experience({ products }: { products: ResolvedProduct[] }
         if (o > 0.001) el.style.transform = `translate3d(${(0.4 - local) * 12}vw,0,0)`;
       });
 
-      if (progressEl && t > -0.15 && progressEl.style.opacity === "") progressEl.style.opacity = "1";
-      if (fill) fill.style.transform = `scaleY(${clamp01(t / (N - 1 + 0.2))})`;
+      if (!progressShown && t > -0.15) {
+        progressShown = true;
+        progressEls.forEach((el) => (el.style.opacity = "1"));
+      }
+      const progress = clamp01(t / (N - 1 + 0.2));
+      if (fill) fill.style.transform = `scaleY(${progress})`;
+      if (fillX) fillX.style.transform = `scaleX(${progress})`;
       const active = Math.min(N - 1, Math.max(0, Math.round(t - 0.4)));
       if (active !== lastActive) {
         lastActive = active;
