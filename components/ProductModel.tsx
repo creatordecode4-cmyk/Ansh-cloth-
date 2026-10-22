@@ -3,6 +3,7 @@
 import { useMemo } from "react";
 import { useGLTF } from "@react-three/drei";
 import { Box3, Group, Mesh, MeshStandardMaterial, Vector3 } from "three";
+import SoftShadow from "./SoftShadow";
 
 /** Every product is normalised so its largest dimension equals this (world units). */
 export const TARGET_SIZE = 2;
@@ -15,7 +16,7 @@ export default function ProductModel({ path }: { path: string }) {
   // Second argument false: the models are plain GLB, no Draco decoder needed.
   const { scene } = useGLTF(path, false);
 
-  const normalized = useMemo(() => {
+  const { normalized, bottom, footprint } = useMemo(() => {
     const root = scene.clone(true);
     root.updateMatrixWorld(true);
     const box = new Box3().setFromObject(root);
@@ -36,10 +37,16 @@ export default function ProductModel({ path }: { path: string }) {
 
     const wrapper = new Group();
     wrapper.add(root);
-    wrapper.scale.setScalar(TARGET_SIZE / Math.max(size.x, size.y, size.z, 1e-6));
-    return wrapper;
+    const scale = TARGET_SIZE / Math.max(size.x, size.y, size.z, 1e-6);
+    wrapper.scale.setScalar(scale);
+    return { normalized: wrapper, bottom: (-size.y * scale) / 2, footprint: Math.max(size.x, size.z) * scale };
   }, [scene]);
   // The clone shares geometry/materials with the cached GLTF; Scene releases that cache on unmount.
 
-  return <primitive object={normalized} />;
+  return (
+    <>
+      <primitive object={normalized} />
+      <SoftShadow y={bottom - 0.12} width={footprint * 1.15} />
+    </>
+  );
 }

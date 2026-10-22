@@ -33,26 +33,25 @@ const ProductSection = forwardRef<HTMLElement, Props>(function ProductSection({ 
     >
       <div data-copy className="pointer-events-none invisible fixed inset-0 flex items-end px-6 pb-[9svh] md:items-center md:px-[8vw] md:pb-0">
         <div className="pointer-events-auto w-full max-w-xl text-center md:w-[42%] md:text-left">
-          <p data-reveal className="mb-4 flex items-center justify-center gap-3 text-[11px] uppercase tracking-[0.4em] text-gold-soft/80 md:justify-start">
+          <p data-reveal className="mb-4 flex items-center justify-center gap-3 text-[11px] font-medium uppercase tracking-[0.4em] text-accent md:justify-start">
             <span className="tabular-nums">{String(index + 1).padStart(2, "0")} / {String(total).padStart(2, "0")}</span>
-            <span className="h-px w-8 bg-gold/50" />
+            <span className="h-px w-8 bg-accent/40" />
             <span>{product.category}</span>
           </p>
-          <h2 data-reveal className="font-serif text-6xl leading-[0.95] text-white sm:text-7xl lg:text-8xl">
+          <h2 data-reveal className="font-serif text-6xl leading-[0.95] text-ink sm:text-7xl lg:text-8xl">
             {product.name}
           </h2>
-          <p data-reveal className="mx-auto mt-5 max-w-sm text-sm leading-relaxed text-white/60 sm:text-base md:mx-0">
+          <p data-reveal className="mx-auto mt-5 max-w-sm text-sm leading-relaxed text-muted sm:text-base md:mx-0">
             {product.tagline}
           </p>
           <div data-reveal className="mt-8 flex items-center justify-center gap-6 md:justify-start">
-            <span className="font-serif text-2xl gold-text sm:text-3xl">{formatPrice(product.price)}</span>
+            <span className="font-serif text-2xl text-accent sm:text-3xl">{formatPrice(product.price)}</span>
             <button
               type="button"
               onClick={onAdd}
-              className="group relative overflow-hidden rounded-full border border-gold/60 px-7 py-3 text-[11px] uppercase tracking-[0.3em] text-gold-soft transition-colors duration-500 hover:text-ink focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-gold"
+              className="rounded-2xl bg-ink px-7 py-3.5 text-[11px] font-medium uppercase tracking-[0.25em] text-white shadow-[0_10px_24px_-10px_rgba(31,31,36,0.45)] transition-all duration-300 ease-out hover:-translate-y-0.5 hover:bg-[#2c2c33] hover:shadow-[0_16px_32px_-12px_rgba(31,31,36,0.5)] active:translate-y-0 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent"
             >
-              <span className="absolute inset-0 -translate-x-full bg-gold transition-transform duration-500 ease-out group-hover:translate-x-0" />
-              <span className="relative">{added ? "Added ✓" : "Add to Cart"}</span>
+              {added ? "Added \u2713" : "Add to Cart"}
             </button>
           </div>
         </div>

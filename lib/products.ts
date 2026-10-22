@@ -8,11 +8,11 @@ export type Product = {
   /** GLB in /public/models. Used when the file exists, otherwise imagePath is shown as a 3D card. */
   modelPath: string;
   imagePath: string;
-  /** Primary glow behind the product. */
+  /** Primary pastel blob behind the product (also the image-card frame). */
   glow: string;
-  /** Secondary glow, usually the muted purple. */
+  /** Secondary pastel blob, bottom-left. */
   glow2: string;
-  /** Base background tint for this section. */
+  /** Very light base tint for this section; the page fades from white into it. */
   bg: string;
 };
 
@@ -25,9 +25,9 @@ export const products: Product[] = [
     price: 12400,
     modelPath: "/models/watch.glb",
     imagePath: "/images/watch.jpg",
-    glow: "#d4a24c",
-    glow2: "#5b3f7a",
-    bg: "#100d0a",
+    glow: "#FFD2B8",
+    glow2: "#D6E6FA",
+    bg: "#FBF3EC",
   },
   {
     id: "perfume",
@@ -37,9 +37,9 @@ export const products: Product[] = [
     price: 340,
     modelPath: "/models/perfume.glb",
     imagePath: "/images/perfume.jpg",
-    glow: "#e0a868",
-    glow2: "#6c3f86",
-    bg: "#110b10",
+    glow: "#E3D3FA",
+    glow2: "#FBD6E2",
+    bg: "#F6F1FA",
   },
   {
     id: "shoes",
@@ -49,9 +49,9 @@ export const products: Product[] = [
     price: 890,
     modelPath: "/models/shoes.glb",
     imagePath: "/images/shoes.jpg",
-    glow: "#cfc3a8",
-    glow2: "#4b4a78",
-    bg: "#0c0d10",
+    glow: "#C9E2FA",
+    glow2: "#CDEFE0",
+    bg: "#EEF5FB",
   },
   {
     id: "bag",
@@ -61,9 +61,9 @@ export const products: Product[] = [
     price: 3200,
     modelPath: "/models/bag.glb",
     imagePath: "/images/bag.jpg",
-    glow: "#c47a3c",
-    glow2: "#5a3550",
-    bg: "#120c09",
+    glow: "#FBDDBA",
+    glow2: "#F7D2C6",
+    bg: "#FBF4EA",
   },
   {
     id: "jacket",
@@ -73,9 +73,9 @@ export const products: Product[] = [
     price: 2650,
     modelPath: "/models/jacket.glb",
     imagePath: "/images/jacket.jpg",
-    glow: "#b08d57",
-    glow2: "#3f3566",
-    bg: "#0b0a0d",
+    glow: "#CFE6EF",
+    glow2: "#DDD6F2",
+    bg: "#F0F5F7",
   },
   {
     id: "shirt",
@@ -85,9 +85,9 @@ export const products: Product[] = [
     price: 420,
     modelPath: "/models/shirt.glb",
     imagePath: "/images/shirt.jpg",
-    glow: "#e8dcc2",
-    glow2: "#5e4e86",
-    bg: "#0e0d11",
+    glow: "#C8EDD7",
+    glow2: "#FBEDBB",
+    bg: "#F0F8F2",
   },
   {
     id: "belt",
@@ -97,9 +97,9 @@ export const products: Product[] = [
     price: 560,
     modelPath: "/models/belt.glb",
     imagePath: "/images/belt.jpg",
-    glow: "#a8956f",
-    glow2: "#4a3a6e",
-    bg: "#0d0c0c",
+    glow: "#F9E9A8",
+    glow2: "#F8D5BE",
+    bg: "#FBF8EA",
   },
 ];
 

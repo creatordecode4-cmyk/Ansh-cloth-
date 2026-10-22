@@ -12,19 +12,19 @@ const Hero = forwardRef<HTMLElement>(function Hero(_, ref) {
       style={{ height: `${HERO_VH}vh` }}
     >
       <div data-hero-content className="flex flex-col items-center">
-        <p className="mb-6 text-[11px] uppercase tracking-[0.5em] text-gold-soft/80 sm:text-xs">
+        <p className="mb-6 text-[11px] uppercase tracking-[0.5em] text-accent sm:text-xs">
           Maison de Luxe &middot; Est. MMXXVI
         </p>
-        <h1 className="font-serif text-[22vw] leading-none tracking-[0.12em] gold-text sm:text-[13vw] lg:text-[11rem]">
+        <h1 className="font-serif text-[22vw] leading-none tracking-[0.12em] brand-text sm:text-[13vw] lg:text-[11rem]">
           AURUM
         </h1>
-        <p className="mt-6 max-w-md font-serif text-lg italic text-white/70 sm:text-2xl">
+        <p className="mt-6 max-w-md font-serif text-lg italic text-muted sm:text-2xl">
           Objects of quiet permanence.
         </p>
       </div>
       <div data-hero-cue className="absolute bottom-10 flex flex-col items-center gap-4">
-        <span className="text-[10px] uppercase tracking-[0.5em] text-white/50">Scroll to explore</span>
-        <span className="scroll-cue relative h-14 w-px overflow-hidden bg-white/10" />
+        <span className="text-[10px] uppercase tracking-[0.5em] text-muted">Scroll to explore</span>
+        <span className="scroll-cue relative h-14 w-px overflow-hidden bg-ink/10" />
       </div>
     </section>
   );

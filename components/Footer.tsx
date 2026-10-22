@@ -29,14 +29,14 @@ export default function Footer() {
   };
 
   return (
-    <footer className="relative z-10 border-t border-white/10 bg-ink/95 px-6 pb-10 pt-24 backdrop-blur-xl md:px-[8vw]">
+    <footer className="relative z-10 rounded-t-[2.5rem] border-t border-white bg-cream/95 px-6 pb-10 pt-24 shadow-[0_-20px_60px_-30px_rgba(31,31,36,0.15)] backdrop-blur-xl md:px-[8vw]">
       <div className="mx-auto grid max-w-6xl gap-16 md:grid-cols-[1.4fr_1fr]">
         <div>
-          <p className="text-[11px] uppercase tracking-[0.4em] text-gold-soft/70">The Aurum Letter</p>
-          <h3 className="mt-4 font-serif text-4xl leading-tight sm:text-5xl">
-            First access to <span className="italic gold-text">new arrivals</span>.
+          <p className="text-[11px] font-medium uppercase tracking-[0.4em] text-accent">The Aurum Letter</p>
+          <h3 className="mt-4 font-serif text-4xl leading-tight text-ink sm:text-5xl">
+            First access to <span className="italic text-accent">new arrivals</span>.
           </h3>
-          <form onSubmit={onSubmit} className="mt-8 flex max-w-md items-center gap-3 border-b border-white/20 pb-3 focus-within:border-gold">
+          <form onSubmit={onSubmit} className="mt-8 flex max-w-md flex-col gap-3 sm:flex-row">
             <label htmlFor="newsletter" className="sr-only">Email address</label>
             <input
               id="newsletter"
@@ -45,37 +45,37 @@ export default function Footer() {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder="Your email address"
-              className="w-full bg-transparent text-sm text-white placeholder:text-white/35 focus:outline-none"
+              className="w-full rounded-2xl border border-ink/10 bg-white px-5 py-3.5 text-sm text-ink shadow-[0_6px_20px_-12px_rgba(31,31,36,0.25)] placeholder:text-muted/80 transition focus:border-accent/50 focus:outline-none focus:ring-4 focus:ring-accent-soft"
             />
-            <button type="submit" className="shrink-0 text-[11px] uppercase tracking-[0.3em] text-gold-soft transition-colors hover:text-white">
+            <button type="submit" className="shrink-0 rounded-2xl bg-ink px-6 py-3.5 text-[11px] font-medium uppercase tracking-[0.25em] text-white shadow-[0_10px_24px_-10px_rgba(31,31,36,0.45)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#2c2c33] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent">
               Subscribe
             </button>
           </form>
-          <p className="mt-3 h-4 text-xs text-gold-soft/80" aria-live="polite">
+          <p className="mt-3 h-4 text-xs text-accent" aria-live="polite">
             {subscribed ? "Thank you. You're on the list." : ""}
           </p>
         </div>
-        <div className="grid grid-cols-2 gap-8 text-sm text-white/60">
+        <div className="grid grid-cols-2 gap-8 text-sm text-muted">
           <div>
-            <p className="mb-4 text-[11px] uppercase tracking-[0.3em] text-white/40">Maison</p>
+            <p className="mb-4 text-[11px] uppercase tracking-[0.3em] text-ink/70">Maison</p>
             <ul className="space-y-2">
-              <li><a href="#collection" className="hover:text-gold-soft">Collections</a></li>
-              <li><a href="#top" className="hover:text-gold-soft">Ateliers</a></li>
-              <li><a href="#top" className="hover:text-gold-soft">Boutiques</a></li>
+              <li><a href="#collection" className="hover:text-accent">Collections</a></li>
+              <li><a href="#top" className="hover:text-accent">Ateliers</a></li>
+              <li><a href="#top" className="hover:text-accent">Boutiques</a></li>
             </ul>
           </div>
           <div>
-            <p className="mb-4 text-[11px] uppercase tracking-[0.3em] text-white/40">Client care</p>
+            <p className="mb-4 text-[11px] uppercase tracking-[0.3em] text-ink/70">Client care</p>
             <ul className="space-y-2">
-              <li><a href="#top" className="hover:text-gold-soft">Contact</a></li>
-              <li><a href="#top" className="hover:text-gold-soft">Shipping</a></li>
-              <li><a href="#top" className="hover:text-gold-soft">Returns</a></li>
+              <li><a href="#top" className="hover:text-accent">Contact</a></li>
+              <li><a href="#top" className="hover:text-accent">Shipping</a></li>
+              <li><a href="#top" className="hover:text-accent">Returns</a></li>
             </ul>
           </div>
         </div>
       </div>
-      <div className="mx-auto mt-20 flex max-w-6xl flex-col items-center justify-between gap-6 border-t border-white/10 pt-8 sm:flex-row">
-        <p className="font-serif text-2xl tracking-[0.3em] gold-text">AURUM</p>
+      <div className="mx-auto mt-20 flex max-w-6xl flex-col items-center justify-between gap-6 border-t border-ink/10 pt-8 sm:flex-row">
+        <p className="font-serif text-2xl tracking-[0.3em] brand-text">AURUM</p>
         <ul className="flex gap-4">
           {socials.map((s) => (
             <li key={s.name}>
@@ -84,7 +84,7 @@ export default function Footer() {
                 target="_blank"
                 rel="noreferrer"
                 aria-label={s.name}
-                className="grid h-10 w-10 place-items-center rounded-full border border-white/15 text-white/60 transition-colors hover:border-gold hover:text-gold"
+                className="grid h-10 w-10 place-items-center rounded-full border border-ink/10 bg-white text-muted shadow-[0_4px_14px_-8px_rgba(31,31,36,0.3)] transition-all hover:-translate-y-0.5 hover:border-accent/40 hover:text-accent"
               >
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
                   <path d={s.path} />
@@ -93,7 +93,7 @@ export default function Footer() {
             </li>
           ))}
         </ul>
-        <p className="text-xs text-white/35">&copy; {new Date().getFullYear()} Aurum. All rights reserved.</p>
+        <p className="text-xs text-muted">&copy; {new Date().getFullYear()} Aurum. All rights reserved.</p>
       </div>
     </footer>
   );

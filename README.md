@@ -46,9 +46,9 @@ The order of the array is the scroll order. Each entry looks like this:
   price: 2650,                      // number in USD, formatted automatically ($2,650)
   modelPath: "/models/jacket.glb",  // 3D model, relative to /public
   imagePath: "/images/jacket.jpg",  // fallback photo, relative to /public
-  glow: "#b08d57",                  // main glow colour behind the product (also the card frame)
-  glow2: "#3f3566",                 // secondary glow (the muted purple)
-  bg: "#0b0a0d",                    // base background tint for this section
+  glow: "#CFE6EF",                  // pastel blob behind the product (also tints the card frame)
+  glow2: "#DDD6F2",                 // secondary pastel blob
+  bg: "#F0F5F7",                    // very light base tint; the page fades from white into it
 }
 ```
 
@@ -59,7 +59,7 @@ The order of the array is the scroll order. Each entry looks like this:
 | `price` | Plain number; shown as USD with no decimals. Change `formatPrice` in the same file for another currency. |
 | `modelPath` | Path to a `.glb` in `public/models/`. If the file exists at build time it is shown in 3D. Models are auto-centred and scaled, so any size works, but keep files under ~5 MB. Use plain GLB (not Draco-compressed). |
 | `imagePath` | Path to a photo in `public/images/`, used only when `modelPath` does not exist. Portrait images around 2:3 look best. |
-| `glow`, `glow2`, `bg` | Hex colours. The background blends smoothly between products' colours as you scroll. |
+| `glow`, `glow2`, `bg` | Hex colours. Keep them light pastels so text stays readable (headings `#1F1F24`, taglines `#5B5B66`, accent `#9C4A1E`). The background blends smoothly between products' colours as you scroll. |
 
 **Common edits**
 

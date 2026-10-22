@@ -2,8 +2,9 @@
 
 import { useEffect, useMemo } from "react";
 import { useTexture } from "@react-three/drei";
-import { CanvasTexture, SRGBColorSpace } from "three";
+import { CanvasTexture, Color, SRGBColorSpace } from "three";
 import { TARGET_SIZE } from "./ProductModel";
+import SoftShadow from "./SoftShadow";
 
 const DEPTH = 0.035;
 
@@ -12,8 +13,8 @@ function makeShadowTexture() {
   c.width = c.height = 128;
   const ctx = c.getContext("2d")!;
   const g = ctx.createRadialGradient(64, 64, 8, 64, 64, 64);
-  g.addColorStop(0, "rgba(0,0,0,0.85)");
-  g.addColorStop(1, "rgba(0,0,0,0)");
+  g.addColorStop(0, "rgba(70,62,84,0.32)");
+  g.addColorStop(1, "rgba(70,62,84,0)");
   ctx.fillStyle = g;
   ctx.fillRect(0, 0, 128, 128);
   return new CanvasTexture(c);
@@ -26,6 +27,7 @@ function makeShadowTexture() {
 export default function ProductImageCard({ path, glow }: { path: string; glow: string }) {
   const texture = useTexture(path);
   const shadow = useMemo(makeShadowTexture, []);
+  const frame = useMemo(() => new Color("#ffffff").lerp(new Color(glow), 0.35), [glow]);
 
   useEffect(() => {
     texture.colorSpace = SRGBColorSpace;
@@ -44,17 +46,18 @@ export default function ProductImageCard({ path, glow }: { path: string; glow: s
       {/* Soft shadow floating behind the card */}
       <mesh position={[0.18, -0.22, -0.35]} scale={[w * 1.5, h * 1.35, 1]}>
         <planeGeometry />
-        <meshBasicMaterial map={shadow} transparent opacity={0.7} depthWrite={false} />
+        <meshBasicMaterial map={shadow} transparent opacity={0.6} depthWrite={false} />
       </mesh>
-      {/* Thin gold frame */}
+      <SoftShadow y={-h / 2 - 0.14} width={w * 1.4} depth={0.5} />
+      {/* Thin white frame with a hint of the section tint */}
       <mesh position={[0, 0, -DEPTH / 2 - 0.004]} castShadow>
-        <boxGeometry args={[w + 0.05, h + 0.05, DEPTH]} />
-        <meshStandardMaterial color={glow} metalness={0.9} roughness={0.3} />
+        <boxGeometry args={[w + 0.08, h + 0.08, DEPTH]} />
+        <meshStandardMaterial color={frame} metalness={0} roughness={0.55} />
       </mesh>
       {/* Printed face */}
       <mesh position={[0, 0, 0.001]}>
         <planeGeometry args={[w, h]} />
-        <meshPhysicalMaterial map={texture} roughness={0.55} clearcoat={0.4} clearcoatRoughness={0.4} envMapIntensity={0.35} />
+        <meshPhysicalMaterial map={texture} roughness={0.55} clearcoat={0.4} clearcoatRoughness={0.4} envMapIntensity={0.25} />
       </mesh>
     </group>
   );

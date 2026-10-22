@@ -4,7 +4,6 @@ import { Component, Suspense, useEffect, useMemo, useRef, type ReactNode } from 
 import { Canvas, useFrame } from "@react-three/fiber";
 import {
   AdaptiveDpr,
-  ContactShadows,
   Environment,
   PointMaterial,
   Points,
@@ -12,10 +11,10 @@ import {
   useGLTF,
   useTexture,
 } from "@react-three/drei";
-import type { Group, Points as ThreePoints } from "three";
+import type { Points as ThreePoints } from "three";
 import { asset } from "@/lib/asset";
 import type { ResolvedProduct } from "@/lib/products";
-import ProductStage, { useStageLayout } from "./ProductStage";
+import ProductStage from "./ProductStage";
 import ProductModel from "./ProductModel";
 import ProductImageCard from "./ProductImageCard";
 
@@ -45,30 +44,14 @@ function Dust({ count = 260 }: { count?: number }) {
   useFrame((state, delta) => {
     const p = ref.current;
     if (!p) return;
-    p.rotation.y += delta * 0.012;
+    p.rotation.y += delta * 0.008;
     p.position.y = Math.sin(state.clock.elapsedTime * 0.08) * 0.4;
   });
 
   return (
     <Points ref={ref} positions={positions} stride={3} frustumCulled={false}>
-      <PointMaterial transparent color="#e9cf98" size={0.025} sizeAttenuation depthWrite={false} opacity={0.55} />
+      <PointMaterial transparent color="#f2c9b0" size={0.03} sizeAttenuation depthWrite={false} opacity={0.4} />
     </Points>
-  );
-}
-
-/** One shared contact shadow that follows the product slot (cheaper than one per product). */
-function Shadow() {
-  const ref = useRef<Group>(null);
-  const layout = useStageLayout();
-  useFrame(() => {
-    if (!ref.current) return;
-    ref.current.position.set(layout.x, layout.y - 1.45 * layout.scale, 0);
-    ref.current.scale.setScalar(layout.scale);
-  });
-  return (
-    <group ref={ref}>
-      <ContactShadows opacity={0.6} scale={7} blur={2.6} far={3} resolution={512} color="#000000" />
-    </group>
   );
 }
 
@@ -108,23 +91,24 @@ export default function Scene({ products }: { products: ResolvedProduct[] }) {
       dpr={[1, isMobile ? 1.5 : 2]}
       gl={{ antialias: true, alpha: true, powerPreference: "high-performance" }}
     >
-      <ambientLight intensity={0.25} />
+      <ambientLight intensity={0.6} />
       {/* Key */}
-      <spotLight position={[3, 5, 6]} angle={0.4} penumbra={1} intensity={60} color="#fff4e2" />
+      <spotLight position={[3, 5, 6]} angle={0.4} penumbra={1} intensity={80} color="#ffffff" />
       {/* Warm and cool rim lights from behind */}
-      <directionalLight position={[-5, 3, -5]} intensity={2.6} color="#f2c27a" />
-      <directionalLight position={[5, 1.5, -4]} intensity={1.6} color="#a58ad6" />
+      <directionalLight position={[-5, 3, -5]} intensity={2} color="#ffe2cc" />
+      <directionalLight position={[5, 1.5, -4]} intensity={1.4} color="#dfe6ff" />
+      {/* Soft front fill for the bright theme */}
+      <directionalLight position={[0, 2, 5]} intensity={0.8} color="#ffffff" />
 
       <Suspense fallback={null}>
         <SoftBoundary>
           {/* drei's "studio" preset, self-hosted (CC0, @pmndrs/assets) instead of fetched from a CDN at runtime */}
-          <Environment files={asset("/hdri/studio.exr")} environmentIntensity={0.7} />
+          <Environment files={asset("/hdri/studio.exr")} environmentIntensity={1.35} />
         </SoftBoundary>
       </Suspense>
 
       <Suspense fallback={null}>
         <Products products={products} />
-        <Shadow />
         <Preload all />
       </Suspense>
 

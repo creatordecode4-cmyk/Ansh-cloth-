@@ -45,16 +45,16 @@ export default function Loader({ onDone }: { onDone: () => void }) {
     <div
       aria-live="polite"
       aria-busy={!hidden}
-      className={`fixed inset-0 z-[100] flex flex-col items-center justify-center bg-ink transition-opacity duration-1000 ${
+      className={`fixed inset-0 z-[100] flex flex-col items-center justify-center bg-white transition-opacity duration-1000 ${
         hidden ? "pointer-events-none opacity-0" : "opacity-100"
       }`}
     >
-      <div className="absolute inset-0 bg-[radial-gradient(40%_35%_at_50%_50%,rgba(212,162,76,0.16),transparent_70%)]" />
-      <p className="relative font-serif text-5xl tracking-[0.35em] gold-text sm:text-6xl">AURUM</p>
-      <div className="relative mt-10 h-px w-56 overflow-hidden bg-white/10">
-        <div className="h-full bg-gold transition-[width] duration-200" style={{ width: `${shown}%` }} />
+      <div className="absolute inset-0 bg-[radial-gradient(40%_35%_at_50%_50%,rgba(255,210,184,0.45),transparent_70%)]" />
+      <p className="relative font-serif text-5xl tracking-[0.35em] brand-text sm:text-6xl">AURUM</p>
+      <div className="relative mt-10 h-px w-56 overflow-hidden bg-ink/10">
+        <div className="h-full bg-accent transition-[width] duration-200" style={{ width: `${shown}%` }} />
       </div>
-      <p className="relative mt-4 font-sans text-xs tracking-[0.4em] text-white/50 tabular-nums">
+      <p className="relative mt-4 font-sans text-xs tracking-[0.4em] text-muted tabular-nums">
         {Math.round(shown).toString().padStart(3, "0")}%
       </p>
     </div>
