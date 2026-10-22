@@ -59,6 +59,7 @@ The order of the array is the scroll order. Each entry looks like this:
 | `price` | Plain number; shown as USD with no decimals. Change `formatPrice` in the same file for another currency. |
 | `modelPath` | Path to a `.glb` in `public/models/`. If the file exists at build time it is shown in 3D. Models are auto-centred and scaled, so any size works, but keep files under ~5 MB. Use plain GLB (not Draco-compressed). |
 | `imagePath` | Path to a photo in `public/images/`, used only when `modelPath` does not exist. Portrait images around 2:3 look best. |
+| `material` (optional) | Overrides a model's `metalness` / `roughness` factors. Use it when an auto-generated GLB renders too dark or too mirror-like (the perfume uses `{ metalness: 0.12 }`). |
 | `glow`, `glow2`, `bg` | Hex colours. Keep them light pastels so text stays readable (headings `#1F1F24`, taglines `#5B5B66`, accent `#9C4A1E`). The background blends smoothly between products' colours as you scroll. |
 
 **Common edits**
@@ -67,6 +68,13 @@ The order of the array is the scroll order. Each entry looks like this:
 - *Add a product:* add a new object to the array, plus its model or image in `public/`. Sections, the progress indicator and the "01 / 07" counter all update automatically.
 - *Reorder:* move entries within the array.
 - *Switch a product from image to 3D:* put the `.glb` at its `modelPath`, then restart `npm run dev` or rebuild (the file check runs on the server).
+
+## Model loading
+
+Only the first product's model is loaded before the loader closes. Each next model starts downloading when the
+user reaches the section before it, and models more than two sections away are released from memory.
+Model URLs carry a version query (`?v=4` in `app/page.tsx`): **bump it whenever a GLB is replaced** so browsers
+fetch the new file.
 
 ## Assets
 

@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useMemo } from "react";
+import { useThree } from "@react-three/fiber";
 import { useTexture } from "@react-three/drei";
 import { CanvasTexture, Color, SRGBColorSpace } from "three";
 import { TARGET_SIZE } from "./ProductModel";
@@ -26,14 +27,15 @@ function makeShadowTexture() {
  */
 export default function ProductImageCard({ path, glow }: { path: string; glow: string }) {
   const texture = useTexture(path);
+  const maxAnisotropy = useThree((s) => s.gl.capabilities.getMaxAnisotropy());
   const shadow = useMemo(makeShadowTexture, []);
   const frame = useMemo(() => new Color("#ffffff").lerp(new Color(glow), 0.35), [glow]);
 
   useEffect(() => {
     texture.colorSpace = SRGBColorSpace;
-    texture.anisotropy = 8;
+    texture.anisotropy = maxAnisotropy;
     texture.needsUpdate = true;
-  }, [texture]);
+  }, [texture, maxAnisotropy]);
   useEffect(() => () => shadow.dispose(), [shadow]);
 
   const img = texture.image as { width: number; height: number } | undefined;

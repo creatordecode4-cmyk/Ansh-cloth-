@@ -8,6 +8,11 @@ export type Product = {
   /** GLB in /public/models. Used when the file exists, otherwise imagePath is shown as a 3D card. */
   modelPath: string;
   imagePath: string;
+  /**
+   * Optional fix-ups for a model's material factors (multiplied with its texture maps),
+   * e.g. when an auto-generated GLB marks glass as mirror metal and renders black.
+   */
+  material?: { metalness?: number; roughness?: number };
   /** Primary pastel blob behind the product (also the image-card frame). */
   glow: string;
   /** Secondary pastel blob, bottom-left. */
@@ -37,6 +42,8 @@ export const products: Product[] = [
     price: 340,
     modelPath: "/models/perfume.glb",
     imagePath: "/images/perfume.jpg",
+    // The GLB's material is ~100% metallic and mirror-smooth, which reflects only the dark studio surroundings.
+    material: { metalness: 0.12 },
     glow: "#E3D3FA",
     glow2: "#FBD6E2",
     bg: "#F6F1FA",
