@@ -1,6 +1,8 @@
 "use client";
 
 import { useState, type FormEvent } from "react";
+import Link from "next/link";
+import { categories } from "@/lib/catalog/categories";
 
 const socials = [
   {
@@ -30,7 +32,7 @@ export default function Footer() {
 
   return (
     <footer className="relative z-10 rounded-t-[2.5rem] border-t border-white bg-cream/95 px-6 pb-10 pt-24 shadow-[0_-20px_60px_-30px_rgba(31,31,36,0.15)] backdrop-blur-xl md:px-[8vw]">
-      <div className="mx-auto grid max-w-6xl gap-16 md:grid-cols-[1.4fr_1fr]">
+      <div className="mx-auto grid max-w-6xl gap-16 md:grid-cols-[1.2fr_1.3fr]">
         <div>
           <p className="text-[11px] font-medium uppercase tracking-[0.4em] text-accent">The Aurum Letter</p>
           <h3 className="mt-4 font-serif text-4xl leading-tight text-ink sm:text-5xl">
@@ -55,11 +57,24 @@ export default function Footer() {
             {subscribed ? "Thank you. You're on the list." : ""}
           </p>
         </div>
-        <div className="grid grid-cols-2 gap-8 text-sm text-muted">
+        <div className="grid grid-cols-2 gap-8 text-sm text-muted sm:grid-cols-3">
+          <div>
+            <p className="mb-4 text-[11px] uppercase tracking-[0.3em] text-ink/70">Shop</p>
+            <ul className="space-y-2">
+              {categories.slice(0, 6).map((c) => (
+                <li key={c.slug}>
+                  <Link href={`/${c.slug}`} className="hover:text-accent">
+                    {c.name}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
           <div>
             <p className="mb-4 text-[11px] uppercase tracking-[0.3em] text-ink/70">Maison</p>
             <ul className="space-y-2">
-              <li><a href="#collection" className="hover:text-accent">Collections</a></li>
+              <li><Link href="/#collection" className="hover:text-accent">Collections</Link></li>
+              <li><Link href="/accessories" className="hover:text-accent">Accessories</Link></li>
               <li><a href="#top" className="hover:text-accent">Ateliers</a></li>
               <li><a href="#top" className="hover:text-accent">Boutiques</a></li>
             </ul>

@@ -1,5 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Inter, Playfair_Display } from "next/font/google";
+import Navbar from "@/components/Navbar";
+import { CartProvider } from "@/lib/cart";
 import "./globals.css";
 
 const playfair = Playfair_Display({ subsets: ["latin"], variable: "--font-playfair", display: "swap" });
@@ -17,7 +19,13 @@ export const viewport: Viewport = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className={`${playfair.variable} ${inter.variable}`}>
-      <body className="font-sans antialiased">{children}</body>
+      <body className="font-sans antialiased">
+        {/* Shared by the homepage and every category page, so the cart survives navigation */}
+        <CartProvider>
+          <Navbar />
+          {children}
+        </CartProvider>
+      </body>
     </html>
   );
 }

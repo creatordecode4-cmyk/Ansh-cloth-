@@ -10,6 +10,41 @@ npm run dev     # http://localhost:3000
 npm run build
 ```
 
+## Category pages
+
+Eleven SEO-friendly category pages are generated from **one template**:
+`/watches`, `/t-shirts`, `/perfumes`, `/jackets`, `/belts`, `/shoes`, `/bags`, `/wallets`, `/sunglasses`, `/caps`
+and `/accessories` (a hub that lists belts, wallets, sunglasses and caps together).
+
+```
+app/[category]/page.tsx        route: static params, metadata, JSON-LD, 404 for unknown slugs
+app/sitemap.ts, app/robots.ts  sitemap + robots for every category
+lib/catalog/
+  types.ts                     Category, Product, Facet types
+  categories.ts                category config: name, tagline, hero, pastel theme, filters, size guide
+  products.ts                  demo product data (deterministic) -> replace with your CMS/API
+  filter.ts                    filtering, sorting, new arrivals / best sellers (pure functions)
+components/catalog/
+  CategoryPage.tsx             the template: breadcrumb, hero, rails, filters, grid, load more
+  CategoryHero.tsx             hero banner + breadcrumb
+  FilterPanel.tsx              price range, category facets, colour, brand (sidebar + mobile drawer)
+  ProductCard.tsx              image, badges, rating, price, wishlist, quick view, add to cart
+  ProductRail.tsx              "New Arrivals" / "Best Sellers" scrolling rows
+  QuickView.tsx, SizeGuide.tsx modals
+  Illustration.tsx             recolourable product illustrations (placeholders)
+  CategoryIcon.tsx, ui.tsx     icons, media, stars, wishlist button, accessible modal
+components/ShopByCategory.tsx  homepage card grid
+components/Navbar.tsx          "Categories" mega menu + mobile drawer
+```
+
+**Add a category:** add an entry to `lib/catalog/categories.ts` (slug, name, facets...) and its products —
+the page, mega menu, mobile menu, homepage grid, footer and sitemap all pick it up automatically.
+
+**Use real products:** replace `getProducts()` in `lib/catalog/products.ts` with your data source and return
+`Product` objects. For photos use `image: { kind: "shot", src: "/images/..." }`; the illustrations are only
+placeholders for categories that have no photography yet. Studio shots of the 3D models are rendered by
+`scripts/render-product-shots.mjs` (`npm i --no-save playwright` first).
+
 ## Deploy
 
 **Vercel:** import the repo with default settings (framework is detected as Next.js; build `npm run build`).

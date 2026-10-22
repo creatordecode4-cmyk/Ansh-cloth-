@@ -6,15 +6,14 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Lenis from "lenis";
 import type { ResolvedProduct } from "@/lib/products";
-import { CartProvider } from "@/lib/cart";
 import { EXIT_START, FIRST_PRODUCT_AT_VH, HERO_VH, TRANSITION, clamp01, scrollState, smoothstep } from "@/lib/scrollState";
 import Backdrop from "./Backdrop";
 import Footer from "./Footer";
 import Hero from "./Hero";
 import Loader from "./Loader";
-import Navbar from "./Navbar";
 import ProductSection from "./ProductSection";
 import ProgressIndicator from "./ProgressIndicator";
+import ShopByCategory from "./ShopByCategory";
 
 const Scene = dynamic(() => import("./Scene"), { ssr: false });
 
@@ -25,7 +24,7 @@ const hexToRgb = (hex: string) => {
 const mixRgb = (a: number[], b: number[], f: number) =>
   `rgb(${a.map((v, i) => Math.round(v + (b[i] - v) * f)).join(",")})`;
 
-export default function Experience({ products }: { products: ResolvedProduct[] }) {
+export default function Experience({ products, categoryCounts }: { products: ResolvedProduct[]; categoryCounts: Record<string, number> }) {
   const wrapperRef = useRef<HTMLElement>(null);
   const heroRef = useRef<HTMLElement>(null);
   const footerRef = useRef<HTMLDivElement>(null);
@@ -195,11 +194,10 @@ export default function Experience({ products }: { products: ResolvedProduct[] }
   }, []);
 
   return (
-    <CartProvider>
+    <>
       <Backdrop products={products} />
       <Scene products={products} />
       <Loader onDone={onLoaded} />
-      <Navbar />
       <ProgressIndicator products={products} onSelect={scrollToProduct} />
       <main ref={wrapperRef} className="relative z-10">
         <Hero ref={heroRef} />
@@ -218,8 +216,9 @@ export default function Experience({ products }: { products: ResolvedProduct[] }
         </div>
       </main>
       <div ref={footerRef} className="relative z-10">
+        <ShopByCategory counts={categoryCounts} />
         <Footer />
       </div>
-    </CartProvider>
+    </>
   );
 }
