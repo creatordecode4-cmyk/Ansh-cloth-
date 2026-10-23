@@ -122,7 +122,8 @@ export function Modal({ open, onClose, label, children, wide = false }: { open: 
 
   if (!open) return null;
   return (
-    <div className="fixed inset-0 z-[80] flex items-end justify-center p-0 sm:items-center sm:p-6" role="dialog" aria-modal="true" aria-label={label}>
+    // data-lenis-prevent: on the homepage Lenis would otherwise swallow wheel events and scroll the page behind.
+    <div data-lenis-prevent className="fixed inset-0 z-[80] flex items-end justify-center p-0 sm:items-center sm:p-6" role="dialog" aria-modal="true" aria-label={label}>
       <button type="button" tabIndex={-1} aria-hidden className="absolute inset-0 bg-ink/35 backdrop-blur-sm [animation:fade-in_0.2s_ease-out]" onClick={onClose} />
       <div
         ref={panel}

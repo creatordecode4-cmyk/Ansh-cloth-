@@ -3,6 +3,7 @@ import type { IconName } from "@/lib/catalog/types";
 const PATHS: Record<IconName, string> = {
   watch: "M9 3h6l1 4M9 3 8 7m1 14h6l1-4M9 21l-1-4M12 9v3l2 1.5M17.5 12a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0Z",
   tshirt: "M9 3c.6 1.4 1.7 2 3 2s2.4-.6 3-2l5 2.5-1.8 4-2.2-1V21H8V8.5l-2.2 1L4 5.5 9 3Z",
+  pants: "M7 3h10l1 18h-4.5L12 9l-1.5 12H6L7 3Zm0 3h10M12 3v6",
   perfume: "M10 2.5h4V6h-4zM9 6h6l1 3H8l1-3Zm-2 3h10a1 1 0 0 1 1 1v9.5a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2V10a1 1 0 0 1 1-1Zm5 5.5v3",
   jacket: "M9 3 6 4.5 4 8l-.5 12H7l.5-8V21h9v-9l.5 8h3.5L20 8l-2-3.5L15 3l-3 5-3-5Zm3 5v13",
   belt: "M3 10h18v4H3zM8 9h5v6H8zM10 12h3M17 12h.01M19.5 12h.01",

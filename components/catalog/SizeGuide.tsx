@@ -16,6 +16,12 @@ const TABLES: Record<Guide, { title: string; note: string; head: string[]; rows:
       ["XXL", 116, 78, 52, 66],
     ],
   },
+  trousers: {
+    title: "Trouser size guide",
+    note: "Pick your usual waist size in inches. All styles come with a 32\" inseam and free hemming.",
+    head: ["Waist (in)", "Waist (cm)", "Hip (cm)", "Inseam (cm)"],
+    rows: [28, 30, 32, 34, 36, 38].map((w) => [w, Math.round(w * 2.54), Math.round(w * 2.54 + 20), 81]),
+  },
   shoes: {
     title: "Shoe size conversion",
     note: "Measure your foot from heel to longest toe and pick the closest length.",

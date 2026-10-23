@@ -161,7 +161,7 @@ export default function Navbar() {
 
       {/* Mobile drawer */}
       {drawer && (
-        <div className="fixed inset-0 z-[70] md:hidden" role="dialog" aria-modal="true" aria-label="Menu">
+        <div data-lenis-prevent className="fixed inset-0 z-[70] md:hidden" role="dialog" aria-modal="true" aria-label="Menu">
           <button type="button" aria-label="Close menu" className="absolute inset-0 bg-ink/30 backdrop-blur-sm [animation:fade-in_0.2s_ease-out]" onClick={() => setDrawer(false)} />
           <div className="absolute inset-y-0 right-0 flex w-[86%] max-w-sm flex-col overflow-y-auto bg-white p-6 shadow-2xl [animation:pop-in_0.25s_ease-out]">
             <div className="flex items-center justify-between">

@@ -12,8 +12,8 @@ npm run build
 
 ## Category pages
 
-Eleven SEO-friendly category pages are generated from **one template**:
-`/watches`, `/t-shirts`, `/perfumes`, `/jackets`, `/belts`, `/shoes`, `/bags`, `/wallets`, `/sunglasses`, `/caps`
+Twelve SEO-friendly category pages are generated from **one template**:
+`/watches`, `/t-shirts`, `/pants`, `/perfumes`, `/jackets`, `/belts`, `/shoes`, `/bags`, `/wallets`, `/sunglasses`, `/caps`
 and `/accessories` (a hub that lists belts, wallets, sunglasses and caps together).
 
 ```
@@ -33,6 +33,8 @@ components/catalog/
   QuickView.tsx, SizeGuide.tsx modals
   Illustration.tsx             recolourable product illustrations (placeholders)
   CategoryIcon.tsx, ui.tsx     icons, media, stars, wishlist button, accessible modal
+components/MensEdit.tsx        homepage "The men's edit": T-Shirts, Pants, Watches, Bags, Shoes tiles;
+                               clicking one shows its best sellers (edit the list in app/page.tsx)
 components/ShopByCategory.tsx  homepage card grid
 components/Navbar.tsx          "Categories" mega menu + mobile drawer
 ```

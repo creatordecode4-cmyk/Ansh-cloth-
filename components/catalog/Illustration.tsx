@@ -95,6 +95,30 @@ function Tee({ color, id, neck }: P & { neck: "crew" | "v" | "polo" }) {
   );
 }
 
+/* ---------- Trousers ---------- */
+
+function Pants({ color, accent = "#C9A55A", id }: P) {
+  const crease = shade(color, -0.22);
+  return (
+    <>
+      <Shadow id={id} cy={452} rx={120} ry={18} />
+      {/* Legs */}
+      <path d="M128,118 L272,118 L284,430 L216,434 L200,196 L184,434 L116,430 Z" fill={`url(#${id}-body)`} {...edge(color)} />
+      {/* Waistband with belt loops */}
+      <rect x="126" y="92" width="148" height="28" rx="4" fill={shade(color, -0.08)} {...edge(color)} />
+      {[140, 176, 224, 260].map((x) => (
+        <rect key={x} x={x} y="88" width="8" height="34" rx="2" fill={shade(color, -0.15)} {...edge(color)} />
+      ))}
+      <circle cx="200" cy="106" r="4" fill={accent} />
+      {/* Fly, pockets, creases */}
+      <path d="M200,120 L200,190 C200,198 194,204 186,206" fill="none" stroke={crease} strokeWidth="2" />
+      <path d="M136,124 C150,150 160,156 172,158 M264,124 C250,150 240,156 228,158" fill="none" stroke={crease} strokeWidth="2.2" />
+      <path d="M160,200 L150,426 M240,200 L250,426" stroke={crease} strokeWidth="1.6" opacity="0.55" />
+      <path d="M118,420 L182,423 M218,423 L282,420" {...stitch(color)} />
+    </>
+  );
+}
+
 /* ---------- Outerwear ---------- */
 
 const COAT = (hem: number) =>
@@ -342,6 +366,7 @@ const ART: Record<ArtName, (p: P) => ReactNode> = {
   "tee-crew": (p) => <Tee {...p} neck="crew" />,
   "tee-vneck": (p) => <Tee {...p} neck="v" />,
   polo: (p) => <Tee {...p} neck="polo" />,
+  pants: Pants,
   "jacket-biker": Biker,
   "jacket-bomber": Bomber,
   overcoat: Overcoat,

@@ -14,6 +14,7 @@ import Loader from "./Loader";
 import ProductSection from "./ProductSection";
 import ProgressIndicator from "./ProgressIndicator";
 import ShopByCategory from "./ShopByCategory";
+import MensEdit, { type MensGroup } from "./MensEdit";
 
 const Scene = dynamic(() => import("./Scene"), { ssr: false });
 
@@ -24,7 +25,15 @@ const hexToRgb = (hex: string) => {
 const mixRgb = (a: number[], b: number[], f: number) =>
   `rgb(${a.map((v, i) => Math.round(v + (b[i] - v) * f)).join(",")})`;
 
-export default function Experience({ products, categoryCounts }: { products: ResolvedProduct[]; categoryCounts: Record<string, number> }) {
+export default function Experience({
+  products,
+  categoryCounts,
+  mensEdit,
+}: {
+  products: ResolvedProduct[];
+  categoryCounts: Record<string, number>;
+  mensEdit: MensGroup[];
+}) {
   const wrapperRef = useRef<HTMLElement>(null);
   const heroRef = useRef<HTMLElement>(null);
   const footerRef = useRef<HTMLDivElement>(null);
@@ -216,6 +225,7 @@ export default function Experience({ products, categoryCounts }: { products: Res
         </div>
       </main>
       <div ref={footerRef} className="relative z-10">
+        <MensEdit groups={mensEdit} />
         <ShopByCategory counts={categoryCounts} />
         <Footer />
       </div>

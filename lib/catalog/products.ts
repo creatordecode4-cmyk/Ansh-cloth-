@@ -103,6 +103,25 @@ const recipes: Record<string, Recipe> = {
       details: [`Fit: ${a.fit}`, `Fabric: ${a.fabric}`, `Colour: ${color.name}`, "Pre-shrunk · reinforced shoulder seams", "Machine wash cold"],
     }),
   },
+  pants: {
+    count: 16,
+    brands: ["Aurum", "Northcote", "Atelier Sorel", "Verano"],
+    names: ["Weekend Chino", "Tailored Trouser", "Selvedge 01", "Pleated Wool", "Riviera Linen", "Travel Chino", "Straight Denim", "Officer Chino", "Drawstring Linen", "Flannel Trouser", "Slim Denim", "Garment-Dyed Chino", "Gurkha", "Cargo Chino", "Boardroom", "Sunday"],
+    price: [95, 420],
+    colors: [C.sand, C.navy, C.olive, C.black, C.grey, C.chocolate, C.ivory, C.sky],
+    attrs: (r, pick) => {
+      const style = pick(["Chinos", "Chinos", "Trousers", "Jeans"]);
+      const fabric = style === "Jeans" ? "Selvedge denim" : style === "Trousers" ? pick(["Wool", "Linen"]) : pick(["Cotton twill", "Cotton twill", "Linen"]);
+      return { style, fabric, fit: pick(["Slim", "Straight", "Straight", "Relaxed"]) };
+    },
+    sizes: (r) => sizeRun(["28", "30", "32", "34", "36", "38"], r, 4),
+    pictured: (a) => (a.style === "Jeans" ? C.navy : undefined),
+    image: (a, color) => art("pants", color, a.style === "Jeans" ? "#C9A55A" : "#8A8F98"),
+    describe: (name, a, color) => ({
+      description: `The ${name} — ${a.fit.toLowerCase()}-fit ${a.style.toLowerCase()} in ${a.fabric.toLowerCase()}, finished with a hand-sewn waistband and horn buttons.`,
+      details: [`Style: ${a.style}`, `Fabric: ${a.fabric}`, `Fit: ${a.fit}`, `Colour: ${color.name}`, "Inseam 32\" · free hemming"],
+    }),
+  },
   perfumes: {
     count: 18,
     brands: ["Aurum", "Lumière", "Maison Vale", "Atelier Sorel"],

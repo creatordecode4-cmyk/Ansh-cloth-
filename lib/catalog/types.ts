@@ -3,6 +3,7 @@ export type ArtName =
   | "tee-crew"
   | "tee-vneck"
   | "polo"
+  | "pants"
   | "jacket-biker"
   | "jacket-bomber"
   | "overcoat"
@@ -21,6 +22,7 @@ export type ArtName =
 export type IconName =
   | "watch"
   | "tshirt"
+  | "pants"
   | "perfume"
   | "jacket"
   | "belt"
@@ -47,7 +49,7 @@ export type Facet = {
   options: FacetOption[];
 };
 
-export type SizeGuide = "apparel" | "shoes" | "belts";
+export type SizeGuide = "apparel" | "trousers" | "shoes" | "belts";
 
 export type Product = {
   id: string;
